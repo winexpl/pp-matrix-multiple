@@ -83,7 +83,7 @@ int main(int argc, char **argv) {
     for(int i = 0; i < n; ++i) {
         i_str = std::to_string(i);
         args[2] = i_str.data();
-        int pid = fork();
+        int pid = vfork();
         if(pid == 0) std::cout << execvp("./bin/mul", args);
         pids[i] = pid;
     }
