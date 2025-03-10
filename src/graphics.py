@@ -12,10 +12,12 @@ def creat_graphic(open_mp, linux):
     plt.xlabel("Размер матриц")
     plt.ylabel("Время на перемножение в нс")
 
-    plt.plot(x, open_mp, label="OpenMP")
-    plt.plot(x, linux, label="Linux API")
+    plt.plot(x, open_mp, label='OpenMP')
+    plt.plot(x, linux, label='Linux API')
+    plt.legend(loc='upper left')
 
     plt.savefig("resources/pp_grahic.png")
+    plt.show()
 
 
 def main():
