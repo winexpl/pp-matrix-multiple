@@ -1,4 +1,5 @@
 #include <vector>
+#include <iostream>
 #include <boost/multi_array.hpp>
 #include <sys/mman.h>
 #include <fcntl.h>

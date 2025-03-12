@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 #include <boost/multi_array.hpp>
 #include <random>
 #include <sys/mman.h>
@@ -119,8 +120,10 @@ int main(int argc, char **argv) {
     multiple_matrix_omp(a,b,n);
     auto end2 = std::chrono::high_resolution_clock::now();
 
-    std::cout << "time1 = " << (end1-start1) << std::endl;
-    std::cout << "time2 = " << (end2-start2) << std::endl;
+    std::ofstream out_openmp("./resources/openmp.txt", std::ios_base::app);
+    std::ofstream out_linuxapi("./resources/linuxapi.txt", std::ios_base::app);
 
+    out_linuxapi << (end1-start1);
+    out_openmp << (end2-start2);
 }
 
