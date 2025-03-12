@@ -11,11 +11,12 @@ def get_lines_from_file(filename_omp, filename_la):
 def creat_graphic(open_mp, linux):
     x = list(range(5,5+len(open_mp)))
     plt.xlabel("Размер матриц")
-    plt.ylabel("Время на перемножение в нс")
+    plt.ylabel("Время на перемножение в мс")
     plt.plot(x, open_mp, label="OpenMP")
     plt.plot(x, linux, label="Linux API")
     plt.legend()
     plt.savefig("resources/pp_grahic.png")
+    plt.show()
 
 
 def main():
