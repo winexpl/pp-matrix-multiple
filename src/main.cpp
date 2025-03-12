@@ -87,6 +87,7 @@ void multiple_matrix_os(const boost::multi_array<double, 2> &a, const boost::mul
         pid_t pid = waitpid(pids[i], &status, 0);
     }
     auto result = read_matrix_from_shared(new_ptr, n);
+    std::cout << result;
     munmap(ptr, sizeof(double) * n * n * 3);
     close(shm_fd);
 }
@@ -107,8 +108,11 @@ int main(int argc, char **argv) {
     int n = argc < 2 ? 3: std::atoi(argv[1]);
     boost::multi_array<double, 2> a(boost::extents[n][n]);
     boost::multi_array<double, 2> b(boost::extents[n][n]);
+    
     random_fill_array(a);
     random_fill_array(b);
+
+    std::cout << a << "\n" << b << std::endl;
 
     int q[n][n];
 
@@ -125,5 +129,8 @@ int main(int argc, char **argv) {
 
     out_linuxapi << (end1-start1);
     out_openmp << (end2-start2);
+
+    std::cout << (end1-start1) << std::endl;
+    std::cout << (end2-start2) << std::endl;
 }
 

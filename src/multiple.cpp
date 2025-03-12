@@ -36,20 +36,27 @@ inline void write_row_to_shared(double* ptr, std::vector<double> &a, int row) {
 }
 
 int main(int argc, char** argv) {
+    int shm_fd;
+    double *ptr;
+
     int n = (argc > 1) ? std::atoi(argv[1]) : 0;
     int row = (argc > 2) ? std::atoi(argv[2]) : 0;
 
-    int shm_fd;
-    double *ptr;
-    
     shm_fd = shm_open(SHARED_NAME, O_RDWR, 0644);
-
     ptr = static_cast<double*>(mmap(0, sizeof(double) * n * n * 3, PROT_WRITE, MAP_SHARED, shm_fd, 0));
 
-    auto a = read_matrix_from_shared(ptr, n);
-    auto b = read_matrix_from_shared(ptr + n * n, n);
-    auto result = multiple_square_matrix_row(a, b, row);
-
-    write_row_to_shared(ptr, result, row);
+    auto a_matrix_ptr = ptr + n * row;
+    auto b_matrix_ptr = ptr + n * n;
+    auto c_matrix_ptr = ptr + 2 * n * n + n * row;
+    for(int i = 0; i < n; i++) {
+        double elem = 0;
+        auto c_matrix_current_element_ptr = c_matrix_ptr + i;
+        *c_matrix_current_element_ptr = 0;
+        for(int j = 0; j < n; j++) {
+            auto a_matrix_current_element_ptr = a_matrix_ptr + j;
+            auto b_matrix_current_element_ptr = b_matrix_ptr + j * n + i;
+            *c_matrix_current_element_ptr += *a_matrix_current_element_ptr * *b_matrix_current_element_ptr;
+        }
+    }
     munmap(ptr, sizeof(double) * n * n * 3);
 }

@@ -4,8 +4,8 @@ def get_lines_from_file(filename_omp, filename_la):
     file_omp = open(filename_omp, 'r')
     file_la = open(filename_la, 'r')
 
-    open_mp = [int(x) for x in file_omp.readline().split('ns') if x.isdigit()]
-    linux = [int(x) for x in file_la.readline().split('ns') if x.isdigit()]
+    open_mp = [int(x)/1000000 for x in file_omp.readline().split('ns') if x.isdigit()]
+    linux = [int(x)/1000000 for x in file_la.readline().split('ns') if x.isdigit()]
     return [open_mp, linux]
 
 def creat_graphic(open_mp, linux):
@@ -15,7 +15,7 @@ def creat_graphic(open_mp, linux):
     plt.plot(x, open_mp, label="OpenMP")
     plt.plot(x, linux, label="Linux API")
     plt.legend()
-    plt.savefig("resources/pp_grahic.png")
+    plt.savefig("resources/pp_graphic.png")
     plt.show()
 
 
