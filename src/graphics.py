@@ -8,10 +8,10 @@ def get_lines_from_file(openMp, linuxAPI):
     return [open_mp, linux]
 
 def create_graphic_mp(open_mp):
-    x = list(range(5,5+len(open_mp)))
+    x = list(range(5,(len(open_mp)+1)*5,5))
     plt.subplot(2,2,1)
 
-    plt.xlabel("Размер матриц")
+    plt.xlabel("Размер матрицы")
     plt.ylabel("Время на перемножение в мс")
 
     plt.plot(x, open_mp, label='OpenMP')
@@ -21,10 +21,10 @@ def create_graphic_mp(open_mp):
     # plt.savefig("resources/mp_grahic.png")
 
 def create_graphic_linux(linux):
-    x = list(range(5,5+len(linux)))
+    x = list(range(5,(len(linux)+1)*5,5))
     plt.subplot(2,2,2)
 
-    plt.xlabel("Размер матриц")
+    plt.xlabel("Размер матрицы")
     plt.ylabel("Время на перемножение в мс")
 
     plt.plot(x, linux, label='Linux API')
@@ -34,10 +34,10 @@ def create_graphic_linux(linux):
     # plt.savefig("resources/linux_grahic.png")
 
 def creat_graphic_overall(open_mp, linux):
-    x = list(range(5,5+len(open_mp)))
+    x = list(range(5,(len(open_mp)+1)*5,5))
     plt.subplot(2,2,3)
 
-    plt.xlabel("Размер матриц")
+    plt.xlabel("Размер матрицы")
     plt.ylabel("Время на перемножение в мс")
 
     plt.plot(x, open_mp, label='OpenMP')
