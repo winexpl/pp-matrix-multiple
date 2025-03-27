@@ -47,11 +47,17 @@ def creat_graphic_overall(open_mp, linux):
 
     # plt.savefig("resources/overall_grahic.png")
 
+def print_table(open_mp, linux):
+    print("N*N\topenMP\t\tlinuxAPI")
+    for i in range(len(open_mp)):
+        if ((i+1)*5 in (1,2,5,10,20,50,100,150,250,350,450,500)):
+            print(f"{(i+1)*5}x{(i+1)*5}\t{open_mp[i]}ms\t{linux[i]}ms")
 
 def main():
     openMp = "resources/openmp.txt"
     linuxAPI = "resources/linuxapi.txt"
     open_mp, linux = get_lines_from_file(openMp, linuxAPI)
+    print_table(open_mp, linux)
     if (len(open_mp) != len(linux)):
         print("Different sizes of data!")
         return
